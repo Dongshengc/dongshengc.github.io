@@ -71,7 +71,58 @@
     text-align:center;
     overflow:hidden;
   }
-  .avatar img{ width:100%; height:100%; object-fit:cover; }
+  .avatar img{ width:100%; height:100%; object-fit:cover; image-rendering: -webkit-optimize-contrast;}
+
+  .gallery{
+  position:relative;
+  margin-bottom:16px;
+}
+.gallery-track{
+  display:flex;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  gap:0;
+  border:1px solid var(--line);
+  scrollbar-width:none;
+}
+.gallery-track::-webkit-scrollbar{ display:none; }
+.gallery-track img{
+  flex:0 0 100%;
+  scroll-snap-align:start;
+  width:100%;
+  height:auto;
+  display:block;
+}
+.gallery-nav{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  background:rgba(28,28,26,0.65);
+  color:#fff;
+  border:none;
+  width:34px;
+  height:34px;
+  font-size:16px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.gallery-nav:hover{ background:rgba(28,28,26,0.85); }
+.gallery-prev{ left:8px; }
+.gallery-next{ right:8px; }
+.gallery-dots{
+  display:flex;
+  justify-content:center;
+  gap:6px;
+  margin-top:8px;
+}
+.gallery-dots span{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:var(--line);
+}
 
   aside h1{
     font-size:23px;
@@ -280,11 +331,13 @@
 
   <!-- ================= SIDEBAR ================= -->
   <aside>
-    <div class="avatar"><!-- replace with <img src="your-photo.jpg" alt="Dongsheng"> -->photo</div>
+    <div class="avatar">
+    <img src="images/headshot.jpg" alt="Dongsheng Chen">
+    </div>  
 
     <h1>Dongsheng Chen</h1>
-    <div class="pronouns">he/him</div>
-    <div class="headline">Full-stack Robotics Engineer</div>
+    <!-- <div class="pronouns">he/him</div> -->
+    <div class="headline">Robotics Engineer</div>
 
     <ul class="meta-list">
       <li><span class="icon">📍</span> Philadelphia, PA, USA</li>
@@ -292,10 +345,10 @@
     </ul>
 
     <ul class="link-list">
-      <li><a href="mailto:you@email.com">Email</a></li>
-      <li><a href="#" target="_blank" rel="noopener">Resume (PDF)</a></li>
+      <li><a href="mailto:dongshengc05@gmail.com">Email</a></li>
+      <li><a href="documents/Resume_Dongsheng.pdf" target="_blank" rel="noopener">Resume / CV (PDF)</a></li>
       <!-- <li><a href="https://github.com/yourusername" target="_blank" rel="noopener">GitHub</a></li> -->
-      <li><a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener">LinkedIn</a></li>
+      <li><a href="https://linkedin.com/in/dongsheng-chen" target="_blank" rel="noopener">LinkedIn</a></li>
       <!-- <li><a href="https://scholar.google.com" target="_blank" rel="noopener">Google Scholar</a></li> -->
     </ul>
 
@@ -304,8 +357,8 @@
         <li><a href="#about">About</a></li>
         <li><a href="#projects">Projects</a></li>
         <!-- <li><a href="#publications">Publications</a></li> -->
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#experience">Experience</a></li>
+        <!-- <li><a href="#skills">Skills</a></li>
+        <li><a href="#experience">Experience</a></li> -->
       </ul>
     </nav>
   </aside>
@@ -315,9 +368,17 @@
 
     <section id="about">
       <h3>About Me</h3>
-      <p>I'm a recent robotics PhD graduate from the GRASP Lab at the University of Pennsylvania. During my PhD, I developed a jet-propelled underwater soft robot from mechanical design through a custom PCB and embedded firmware to an RL-based navigation policy deployed and validated on real hardware — full-stack, end to end.</p>
-      <p>I'm interested in [your 1–2 sentence version of a technical thesis statement — e.g. what kind of robotics problems you want to keep working on: underwater/marine robotics, manipulation, embodied AI, hardware-software co-design]. I'm currently looking for robotics engineering roles in [industrial manipulation / marine robotics / embodied AI — edit to your focus].</p>
-      <p>Outside the lab, [one optional personal sentence — mentoring, an open-source project, a hobby — this kind of site often includes this and it helps you read like a person, not just a résumé].</p>
+<p>
+  I'm a recent robotics Ph.D. graduate from the GRASP Lab at the University of Pennsylvania. During my Ph.D., I developed a jet-propelled underwater soft robot. My work covered the full development cycle: from mechanical design, custom PCB design/fabrication, and embedded firmware, to an RL-based navigation policy deployed and validated on real hardware — full-stack, end to end.
+</p>
+
+<p>
+  I am a full-stack robotics engineer who loves bridging the gap between hardware and software. My current interest lies in using reinforcement learning to solve messy, real-world physical challenges where standard analytical models fail. I'm currently looking for robotics engineering roles focused on hardware-software integration, reinforcement learning, and embodied AI.
+</p>
+
+<p>
+When I'm not building robots, you can usually find me working out or practicing my guitar technique.
+</p>
     </section>
 
     <section id="projects">
@@ -329,15 +390,23 @@
     <span class="date">2022 – 2026</span>
   </div>
   <div class="venue">PhD Thesis, GRASP Lab, University of Pennsylvania</div>
+
+  <img src="images/mechatronics/pcb_layout.png" alt="Custom PCB layout" style="width:100%; height:auto; display:block; border:1px solid var(--line); margin-bottom:16px;">
+
   <p>Mechanical design and custom PCB development for a jet-propelled underwater soft robot, including embedded firmware for onboard sensing and actuation control. [Add one sentence on a specific hardware decision or constraint — e.g. sealing/waterproofing, actuator selection, packaging.]</p>
+
   <div class="tags">
     <span>Mechanical design</span>
     <span>Custom PCB</span>
     <span>Embedded firmware</span>
   </div>
+
   <div class="entry-links">
-    <a href="#" target="_blank" rel="noopener">Video</a>
-    <a href="#" target="_blank" rel="noopener">Code</a>
+    <a href="images/mechatronics/pcb_layout.png" target="_blank" rel="noopener">PCB Layout</a>
+    <a href="images/mechatronics/circuit_stack.pdf" target="_blank" rel="noopener">Circuit Stack</a>
+    <a href="images/mechatronics/actuation_circuit.pdf" target="_blank" rel="noopener">Actuation Circuit</a>
+    <a href="images/mechatronics/nozzle_assembly.pdf" target="_blank" rel="noopener">Nozzle Assembly</a>
+    <a href="images/mechatronics/steer_robot_assembly.pdf" target="_blank" rel="noopener">Steering Assembly</a>
   </div>
 </div>
 
@@ -394,7 +463,7 @@
       </div>
     </section> -->
 
-    <section id="skills">
+    <!-- <section id="skills">
       <h2>Skills</h2>
       <div class="skills-row">
         <div>
@@ -452,7 +521,7 @@
         <h3>[ Earlier role or BS ]</h3>
         <p>One line on scope and outcome.</p>
       </div>
-    </section>
+    </section> -->
 
   </main>
 </div>
