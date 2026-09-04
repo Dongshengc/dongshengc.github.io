@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -73,56 +74,84 @@
   }
   .avatar img{ width:100%; height:100%; object-fit:cover; image-rendering: -webkit-optimize-contrast;}
 
+  /* ---------------- IMAGE GALLERY ---------------- */
   .gallery{
-  position:relative;
-  margin-bottom:16px;
-}
-.gallery-track{
-  display:flex;
-  overflow-x:auto;
-  scroll-snap-type:x mandatory;
-  gap:0;
-  border:1px solid var(--line);
-  scrollbar-width:none;
-}
-.gallery-track::-webkit-scrollbar{ display:none; }
-.gallery-track img{
-  flex:0 0 100%;
-  scroll-snap-align:start;
-  width:100%;
-  height:auto;
-  display:block;
-}
-.gallery-nav{
-  position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  background:rgba(28,28,26,0.65);
-  color:#fff;
-  border:none;
-  width:34px;
-  height:34px;
-  font-size:16px;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-.gallery-nav:hover{ background:rgba(28,28,26,0.85); }
-.gallery-prev{ left:8px; }
-.gallery-next{ right:8px; }
-.gallery-dots{
-  display:flex;
-  justify-content:center;
-  gap:6px;
-  margin-top:8px;
-}
-.gallery-dots span{
-  width:6px;
-  height:6px;
-  border-radius:50%;
-  background:var(--line);
-}
+    position:relative;
+    margin-bottom:16px;
+  }
+  .gallery-track{
+    display:flex;
+    align-items:flex-start;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    gap:0;
+    border:1px solid var(--line);
+    border-radius:8px;
+    background:var(--paper);
+    box-shadow:0 1px 4px rgba(28,28,26,0.06);
+    scrollbar-width:none;
+  }
+  .gallery-track::-webkit-scrollbar{ display:none; }
+  .gallery-slide{
+    flex:0 0 100%;
+    scroll-snap-align:start;
+  }
+  .gallery-media{
+    box-sizing:border-box;
+    aspect-ratio:4/3;
+    background:var(--paper);
+    padding:22px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+  }
+  .gallery-media img{
+    max-width:100%;
+    max-height:100%;
+    width:auto;
+    height:auto;
+    object-fit:contain;
+    display:block;
+    border-radius:4px;
+  }
+  .gallery-caption{
+    font-size:12.5px;
+    color:var(--muted);
+    text-align:center;
+    padding:8px 12px;
+    border-top:1px solid var(--line);
+  }
+  .gallery-nav{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    background:rgba(28,28,26,0.65);
+    color:#fff;
+    border:none;
+    width:34px;
+    height:34px;
+    font-size:16px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .gallery-nav:hover{ background:rgba(28,28,26,0.85); }
+  .gallery-prev{ left:8px; }
+  .gallery-next{ right:8px; }
+  .gallery-dots{
+    display:flex;
+    justify-content:center;
+    gap:6px;
+    margin-top:8px;
+  }
+  .gallery-dots span{
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:var(--line);
+  }
 
   aside h1{
     font-size:23px;
@@ -241,8 +270,19 @@
   .entry p{
     font-size:14.5px;
     color:var(--ink);
-    max-width:64ch;
     margin-top:4px;
+  }
+  .entry ul.detail-list{
+    font-size:14.5px;
+    color:var(--ink);
+    margin-top:8px;
+    padding-left:18px;
+  }
+  .entry ul.detail-list li{
+    margin-bottom:6px;
+  }
+  .entry ul.detail-list li:last-child{
+    margin-bottom:0;
   }
   .entry .entry-links{
     margin-top:6px;
@@ -347,18 +387,14 @@
     <ul class="link-list">
       <li><a href="mailto:dongshengc05@gmail.com">Email</a></li>
       <li><a href="documents/Resume_Dongsheng.pdf" target="_blank" rel="noopener">Resume / CV (PDF)</a></li>
-      <!-- <li><a href="https://github.com/yourusername" target="_blank" rel="noopener">GitHub</a></li> -->
-      <li><a href="https://linkedin.com/in/dongsheng-chen" target="_blank" rel="noopener">LinkedIn</a></li>
-      <!-- <li><a href="https://scholar.google.com" target="_blank" rel="noopener">Google Scholar</a></li> -->
+       <li><a href="https://linkedin.com/in/dongsheng-chen" target="_blank" rel="noopener">LinkedIn</a></li>
     </ul>
 
     <nav class="sidenav">
       <ul>
         <li><a href="#about">About</a></li>
         <li><a href="#projects">Projects</a></li>
-        <!-- <li><a href="#publications">Publications</a></li> -->
-        <!-- <li><a href="#skills">Skills</a></li>
-        <li><a href="#experience">Experience</a></li> -->
+
       </ul>
     </nav>
   </aside>
@@ -387,141 +423,137 @@ When I'm not building robots, you can usually find me working out or practicing 
 <div class="entry">
   <div class="entry-top">
     <h3>Underwater Soft Robot — Mechatronics Design</h3>
-    <span class="date">2022 – 2026</span>
+    <span class="date">2020 – 2026</span>
   </div>
   <div class="venue">PhD Thesis, GRASP Lab, University of Pennsylvania</div>
-
-  <img src="images/mechatronics/pcb_layout.png" alt="Custom PCB layout" style="width:100%; height:auto; display:block; border:1px solid var(--line); margin-bottom:16px;">
-
-  <p>Mechanical design and custom PCB development for a jet-propelled underwater soft robot, including embedded firmware for onboard sensing and actuation control. [Add one sentence on a specific hardware decision or constraint — e.g. sealing/waterproofing, actuator selection, packaging.]</p>
-
   <div class="tags">
     <span>Mechanical design</span>
     <span>Custom PCB</span>
     <span>Embedded firmware</span>
   </div>
 
-  <div class="entry-links">
-    <a href="images/mechatronics/pcb_layout.png" target="_blank" rel="noopener">PCB Layout</a>
-    <a href="images/mechatronics/circuit_stack.pdf" target="_blank" rel="noopener">Circuit Stack</a>
-    <a href="images/mechatronics/actuation_circuit.pdf" target="_blank" rel="noopener">Actuation Circuit</a>
-    <a href="images/mechatronics/nozzle_assembly.pdf" target="_blank" rel="noopener">Nozzle Assembly</a>
-    <a href="images/mechatronics/steer_robot_assembly.pdf" target="_blank" rel="noopener">Steering Assembly</a>
+  <p>Mechatronics design for a jet-propelled underwater soft robot, composed of two main subsystems: a main body that generates jet propulsion force, and a swivel nozzle for active steering.</p>
+  <ul class="detail-list">
+    <li>Main body integrates a soft exoskeleton with a custom tendon-driven actuation system.</li>
+    <li>2-DOF swivel nozzle enables precise directional control of the propulsion jet.</li>
+    <li>Embedded firmware on customized PCB handles onboard sensing and actuation control.</li>
+    <li>Full assembly engineered for waterproofing and mechanical robustness under underwater operating conditions.</li>
+  </ul>
+
+
+  <div class="gallery">
+    <div class="gallery-track" id="mechatronics-gallery">
+      <div class="gallery-slide">
+        <div class="gallery-media"><img src="images/mechatronics/robot.png" alt="Steering assembly"></div>
+        <p class="gallery-caption">Steering assembly integrated into the robot body.</p>
+      </div>
+
+      <div class="gallery-slide">
+        <div class="gallery-media"><img src="images/mechatronics/nozzle.png" alt="Nozzle assembly"></div>
+        <p class="gallery-caption">Jet propulsion nozzle assembly.</p>
+      </div>
+      <div class="gallery-slide">
+        <div class="gallery-media"><img src="images/mechatronics/actuation.png" alt="Actuation circuit"></div>
+        <p class="gallery-caption">Actuation circuit driving the jet propulsion system.</p>
+      </div>
+      <div class="gallery-slide">
+        <div class="gallery-media"><img src="images/mechatronics/circuit.png" alt="Circuit stack"></div>
+        <p class="gallery-caption">Custom PCB circuit stack for onboard sensing and actuation control.</p>
+      </div>
+
+      <!-- Add more slides here as you export more images, e.g.: -->
+      <!-- <div class="gallery-slide">
+        <div class="gallery-media"><img src="images/mechatronics/circuit_stack.png" alt="Circuit stack"></div>
+        <p class="gallery-caption">Caption text.</p>
+      </div> -->
+    </div>
+    <button class="gallery-nav gallery-prev" onclick="scrollGallery('mechatronics-gallery', -1)">‹</button>
+    <button class="gallery-nav gallery-next" onclick="scrollGallery('mechatronics-gallery', 1)">›</button>
   </div>
 </div>
 
 <div class="entry">
   <div class="entry-top">
     <h3>Underwater Soft Robot — Fluid Dynamics Simulation</h3>
-    <span class="date">2022 – 2026</span>
+    <span class="date">2020 – 2026</span>
   </div>
   <div class="venue">PhD Thesis, GRASP Lab, University of Pennsylvania</div>
-  <p>[One or two sentences on your simulation approach — e.g. what you modeled (thrust, drag, soft-body deformation), what tools you used, and how the simulation informed the physical design or the RL training environment.]</p>
   <div class="tags">
     <span>Fluid dynamics</span>
     <span>Simulation</span>
-    <span>[Tool — e.g. MuJoCo / custom solver]</span>
+    <span>System identification</span>
   </div>
-  <div class="entry-links">
-    <a href="#" target="_blank" rel="noopener">Write-up</a>
+
+  <p>Developed a custom simulation to model the dynamics of the jet-propelled underwater soft robot, serving as the training environment for reinforcement learning and reducing reliance on physical experimentation.</p>
+  <ul class="detail-list">
+    <li>Built on a modified Newton-Euler formulation with time-dependent parameters derived from data-driven surrogate models.</li>
+    <li>Captures jet force, drag force, and added-mass effects as functions of time.</li>
+    <li>Calibrated against experimentally collected trajectories to ensure simulation fidelity.</li>
+  </ul>
+
+  <div class="gallery">
+    <div class="gallery-track" id="fluid-dynamics-gallery">
+      <div class="gallery-slide">
+        <div class="gallery-media"><img src="images/simulation/calibration.png" alt="Fluid dynamics simulation"></div>
+        <p class="gallery-caption">Simulation trajectory comparison with experimental data</p>
+      </div>
+
+      <!-- Add more slides here as you export more images, e.g.: -->
+      <!-- <div class="gallery-slide">
+        <div class="gallery-media"><img src="images/fluid-dynamics/placeholder2.png" alt="Fluid dynamics simulation"></div>
+        <p class="gallery-caption">Caption text.</p>
+      </div> -->
+    </div>
+    <button class="gallery-nav gallery-prev" onclick="scrollGallery('fluid-dynamics-gallery', -1)">‹</button>
+    <button class="gallery-nav gallery-next" onclick="scrollGallery('fluid-dynamics-gallery', 1)">›</button>
   </div>
+
 </div>
 
 <div class="entry">
   <div class="entry-top">
     <h3>Underwater Soft Robot — RL Navigation Control</h3>
-    <span class="date">2022 – 2026</span>
+    <span class="date">2020 – 2026</span>
   </div>
   <div class="venue">PhD Thesis, GRASP Lab, University of Pennsylvania</div>
-  <p>Reinforcement-learning-based navigation policy trained in simulation and deployed and validated on real hardware. [Add one sentence on the specific hard problem you solved — e.g. sim-to-real gap, reward shaping, robustness to disturbance.]</p>
   <div class="tags">
     <span>Reinforcement learning</span>
     <span>Sim-to-real</span>
     <span>Navigation</span>
   </div>
-  <div class="entry-links">
+
+  <p>Reinforcement-learning-based navigation policy trained in simulation and deployed and validated on real hardware.</p>
+  <ul class="detail-list">
+    <li>Position-tracking policy trained entirely in simulation, then validated in simulation prior to hardware deployment.</li>
+    <li>Applied domain randomization over dynamics parameters, observation noise, latency, and environmental disturbances to enable sim-to-real transfer.</li>
+    <li>Deployed the policy zero-shot on physical hardware, demonstrating successful sim-to-real transfer for position tracking.</li>
+  </ul>
+
+  <div class="gallery">
+    <div class="gallery-track" id="rl-navigation-gallery">
+      <div class="gallery-slide">
+        <div class="gallery-media"><img src="images/RL/trajectory.png" alt="RL navigation policy"></div>
+        <p class="gallery-caption">Robot trajectory tracking performance in simulation.</p>
+      </div>
+
+      <!-- Add more slides here as you export more images, e.g.: -->
+      <!-- <div class="gallery-slide">
+        <div class="gallery-media"><img src="images/rl-navigation/placeholder2.png" alt="RL navigation policy"></div>
+        <p class="gallery-caption">Caption text.</p>
+      </div> -->
+    </div>
+    <button class="gallery-nav gallery-prev" onclick="scrollGallery('rl-navigation-gallery', -1)">‹</button>
+    <button class="gallery-nav gallery-next" onclick="scrollGallery('rl-navigation-gallery', 1)">›</button>
+  </div>
+
+  <!-- <div class="entry-links">
     <a href="#" target="_blank" rel="noopener">Video</a>
     <a href="#" target="_blank" rel="noopener">Code</a>
-  </div>
+  </div> -->
 </div>
     </section>
 
-    <!-- <section id="publications">
-      <h2>Publications</h2>
 
-      <div class="entry">
-        <div class="entry-top">
-          <h3>[ Paper title, if any came out of the thesis or coursework ]</h3>
-          <span class="date">[ Year ]</span>
-        </div>
-        <div class="venue">[ Venue / journal / conference ]</div>
-        <p>Authors, in citation order. [If you have no publications yet, delete this section entirely — an empty section reads worse than no section.]</p>
-        <div class="entry-links">
-          <a href="#" target="_blank" rel="noopener">PDF</a>
-          <a href="#" target="_blank" rel="noopener">Google Scholar</a>
-        </div>
-      </div>
-    </section> -->
-
-    <!-- <section id="skills">
-      <h2>Skills</h2>
-      <div class="skills-row">
-        <div>
-          <h4>Mechanical</h4>
-          <ul>
-            <li>CAD (SolidWorks / Fusion)</li>
-            <li>Soft robotics design</li>
-            <li>Rapid prototyping</li>
-          </ul>
-        </div>
-        <div>
-          <h4>Electrical / Firmware</h4>
-          <ul>
-            <li>Custom PCB design</li>
-            <li>Embedded C/C++</li>
-            <li>ARM Cortex-M (SAMD21)</li>
-          </ul>
-        </div>
-        <div>
-          <h4>Controls / ML</h4>
-          <ul>
-            <li>Reinforcement learning</li>
-            <li>Sim-to-real transfer</li>
-            <li>ROS / ROS2</li>
-          </ul>
-        </div>
-        <div>
-          <h4>Tools</h4>
-          <ul>
-            <li>Python, PyTorch</li>
-            <li>Git, Linux</li>
-            <li>Gazebo / MuJoCo</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section id="experience">
-      <h2>Experience &amp; Education</h2>
-
-      <div class="timeline-entry">
-        <div class="date">2022 – 2026</div>
-        <h3>PhD, Robotics — University of Pennsylvania (GRASP Lab)</h3>
-        <p>Full-stack development of a jet-propelled underwater soft robot: mechanical design, custom PCB / embedded firmware, and RL-based navigation deployed on hardware.</p>
-      </div>
-
-      <div class="timeline-entry">
-        <div class="date">[ Years ]</div>
-        <h3>[ Prior role, internship, or MS ]</h3>
-        <p>One line on scope and outcome.</p>
-      </div>
-
-      <div class="timeline-entry">
-        <div class="date">[ Years ]</div>
-        <h3>[ Earlier role or BS ]</h3>
-        <p>One line on scope and outcome.</p>
-      </div>
-    </section> -->
 
   </main>
 </div>
@@ -529,6 +561,14 @@ When I'm not building robots, you can usually find me working out or practicing 
 <footer>
   © 2026 Dongsheng [Last Name] · Built with HTML/CSS, hosted on GitHub Pages
 </footer>
+
+<script>
+function scrollGallery(id, direction){
+  const track = document.getElementById(id);
+  const slideWidth = track.clientWidth;
+  track.scrollBy({ left: slideWidth * direction, behavior: 'smooth' });
+}
+</script>
 
 </body>
 </html>
