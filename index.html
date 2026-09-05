@@ -38,31 +38,37 @@
   }
 
   .layout{
-    display:grid;
-    grid-template-columns:280px 1fr;
-    max-width:1080px;
+    max-width:1280px;
     margin:0 auto;
     min-height:100vh;
   }
 
-  /* ---------------- SIDEBAR ---------------- */
+  /* ---------------- HERO (About + profile card) ---------------- */
+  .hero{
+    display:flex;
+    justify-content:space-between;
+    gap:32px;
+    align-items:flex-start;
+    padding:56px 40px 40px;
+    margin-bottom:16px;
+  }
+
+  #about{ flex:0 1 auto; min-width:0; }
+  aside{ flex:0 0 300px; }
+
+  /* ---------------- PROFILE CARD ---------------- */
   aside{
-    padding:56px 32px 40px 0;
-    border-right:1px solid var(--line);
-    position:sticky;
-    top:0;
-    align-self:start;
-    height:100vh;
-    overflow-y:auto;
+    display:flex;
+    flex-direction:column;
   }
 
   .avatar{
-    width:132px;
-    height:132px;
+    width:104px;
+    height:104px;
     border-radius:50%;
     background:var(--accent-soft);
     border:1px solid var(--line);
-    margin-bottom:22px;
+    margin-bottom:18px;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -71,6 +77,7 @@
     color:var(--muted);
     text-align:center;
     overflow:hidden;
+    flex-shrink:0;
   }
   .avatar img{ width:100%; height:100%; object-fit:cover; image-rendering: -webkit-optimize-contrast;}
 
@@ -115,6 +122,67 @@
     display:block;
     border-radius:4px;
   }
+  .video-frame{
+    position:relative;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    border-radius:4px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .video-frame iframe{
+    position:static;
+    width:100%;
+    height:auto;
+    aspect-ratio:16/9;
+    transform:none;
+    border:0;
+  }
+  .iframe-vertical-wrap{
+    position:relative;
+    width:42.1875%;
+    aspect-ratio:9/16;
+    margin:0 auto;
+    overflow:hidden;
+    border-radius:4px;
+  }
+  .iframe-vertical-wrap iframe{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    border:0;
+  }
+  .video-link{
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:auto;
+    height:100%;
+    max-width:100%;
+  }
+  .video-link img{
+    max-width:100%;
+    max-height:100%;
+    display:block;
+    border-radius:4px;
+  }
+  .video-link .play-icon{
+    position:absolute;
+    width:52px;
+    height:52px;
+    border-radius:50%;
+    background:rgba(28,28,26,0.72);
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:20px;
+    pointer-events:none;
+  }
   .gallery-caption{
     font-size:12.5px;
     color:var(--muted);
@@ -153,8 +221,38 @@
     background:var(--line);
   }
 
+  /* ---------------- SIDE-BY-SIDE GALLERY PAIR (images | videos) ---------------- */
+  .gallery-pair{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+    margin-bottom:16px;
+  }
+  .gallery-col .gallery{ margin-bottom:0; }
+  .gallery-col-label{
+    font-size:11.5px;
+    font-weight:600;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin-bottom:8px;
+  }
+  .gallery-empty{
+    aspect-ratio:4/3;
+    border:1px dashed var(--line);
+    border-radius:8px;
+    background:var(--accent-soft);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:12.5px;
+    color:var(--muted);
+    text-align:center;
+    padding:16px;
+  }
+
   aside h1{
-    font-size:23px;
+    font-size:20px;
     line-height:1.25;
     margin-bottom:4px;
   }
@@ -164,20 +262,23 @@
     margin-bottom:10px;
   }
   aside .headline{
-    font-size:14.5px;
+    font-size:14px;
     color:var(--ink);
-    margin-bottom:22px;
-    max-width:30ch;
+    margin-bottom:18px;
+    max-width:none;
   }
 
   .meta-list{
     list-style:none;
     font-size:13.5px;
     color:var(--muted);
-    margin-bottom:24px;
+    margin-bottom:18px;
+    display:flex;
+    flex-direction:column;
+    gap:4px;
   }
   .meta-list li{
-    padding:4px 0;
+    padding:0;
     display:flex;
     gap:8px;
   }
@@ -191,19 +292,23 @@
     list-style:none;
     font-size:13.5px;
     border-top:1px solid var(--line);
-    padding-top:16px;
+    padding-top:14px;
+    margin-bottom:14px;
+    display:flex;
+    flex-direction:column;
+    gap:4px;
   }
-  .link-list li{ padding:5px 0; }
+  .link-list li{ padding:0; }
   .link-list a{ color:var(--ink); }
   .link-list a:hover{ color:var(--accent); }
 
   nav.sidenav{
-    margin-top:28px;
+    margin-top:0;
     border-top:1px solid var(--line);
-    padding-top:16px;
+    padding-top:14px;
   }
-  nav.sidenav ul{ list-style:none; }
-  nav.sidenav li{ padding:3px 0; }
+  nav.sidenav ul{ list-style:none; display:flex; flex-direction:column; gap:4px; }
+  nav.sidenav li{ padding:0; }
   nav.sidenav a{
     color:var(--muted);
     font-size:13.5px;
@@ -213,7 +318,7 @@
   nav.sidenav a:hover{ color:var(--accent); }
 
   /* ---------------- MAIN ---------------- */
-  main{ padding:56px 40px 80px 48px; }
+  main{ padding:0 40px 80px; }
 
   main > section{ margin-bottom:64px; scroll-margin-top:40px; }
   main > section:last-child{ margin-bottom:0; }
@@ -231,7 +336,7 @@
   }
 
   #about h3{ font-size:26px; margin-bottom:16px; }
-  #about p{ max-width:66ch; margin-bottom:14px; color:var(--ink); }
+  #about p{ max-width:78ch; margin-bottom:14px; color:var(--ink); }
   #about p:last-child{ margin-bottom:0; }
 
   /* project / pub entries */
@@ -349,16 +454,16 @@
   }
 
   @media (max-width:820px){
-    .layout{ grid-template-columns:1fr; }
-    aside{
-      position:relative;
-      height:auto;
-      border-right:none;
-      border-bottom:1px solid var(--line);
-      padding:40px 24px 32px;
+    .hero{
+      flex-direction:column;
+      gap:28px;
+      padding:32px 24px 24px;
+      margin-bottom:24px;
     }
-    main{ padding:40px 24px 60px; }
+    aside{ flex-basis:auto; }
+    main{ padding:0 24px 60px; }
     footer{ padding:24px; }
+    .gallery-pair{ grid-template-columns:1fr; }
   }
 
   a:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
@@ -369,38 +474,7 @@
 
 <div class="layout">
 
-  <!-- ================= SIDEBAR ================= -->
-  <aside>
-    <div class="avatar">
-    <img src="images/headshot.jpg" alt="Dongsheng Chen">
-    </div>  
-
-    <h1>Dongsheng Chen</h1>
-    <!-- <div class="pronouns">he/him</div> -->
-    <div class="headline">Robotics Engineer</div>
-
-    <ul class="meta-list">
-      <li><span class="icon">📍</span> Philadelphia, PA, USA</li>
-      <li><span class="icon">🎓</span> PhD, University of Pennsylvania</li>
-    </ul>
-
-    <ul class="link-list">
-      <li><a href="mailto:dongshengc05@gmail.com">Email</a></li>
-      <li><a href="documents/Resume_Dongsheng.pdf" target="_blank" rel="noopener">Resume / CV (PDF)</a></li>
-       <li><a href="https://linkedin.com/in/dongsheng-chen" target="_blank" rel="noopener">LinkedIn</a></li>
-    </ul>
-
-    <nav class="sidenav">
-      <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#projects">Projects</a></li>
-
-      </ul>
-    </nav>
-  </aside>
-
-  <!-- ================= MAIN ================= -->
-  <main>
+  <div class="hero">
 
     <section id="about">
       <h3>About Me</h3>
@@ -416,6 +490,41 @@
 When I'm not building robots, you can usually find me working out or practicing my guitar technique.
 </p>
     </section>
+
+    <!-- ================= PROFILE CARD ================= -->
+    <aside>
+      <div class="avatar">
+      <img src="images/headshot.jpg" alt="Dongsheng Chen">
+      </div>  
+
+      <h1>Dongsheng Chen</h1>
+      <!-- <div class="pronouns">he/him</div> -->
+      <div class="headline">Robotics Engineer</div>
+
+      <ul class="meta-list">
+        <li><span class="icon">📍</span> Philadelphia, PA, USA</li>
+        <li><span class="icon">🎓</span> PhD, University of Pennsylvania</li>
+      </ul>
+
+      <ul class="link-list">
+        <li><a href="mailto:dongshengc05@gmail.com">Email</a></li>
+        <li><a href="documents/Resume_Dongsheng.pdf" target="_blank" rel="noopener">Resume / CV (PDF)</a></li>
+         <li><a href="https://linkedin.com/in/dongsheng-chen" target="_blank" rel="noopener">LinkedIn</a></li>
+      </ul>
+
+      <nav class="sidenav">
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects</a></li>
+
+        </ul>
+      </nav>
+    </aside>
+
+  </div>
+
+  <!-- ================= MAIN ================= -->
+  <main>
 
     <section id="projects">
       <h2>Projects</h2>
@@ -441,41 +550,67 @@ When I'm not building robots, you can usually find me working out or practicing 
   </ul>
 
 
-  <div class="gallery">
-    <div class="gallery-track" id="mechatronics-gallery">
-      <div class="gallery-slide">
-        <div class="gallery-media"><img src="images/mechatronics/robot.PNG" alt="Steering assembly"></div>
-        <p class="gallery-caption">Steering assembly integrated into the robot body.</p>
-      </div>
+  <div class="gallery-pair">
+    <div class="gallery-col">
+      <!-- <div class="gallery-col-label">Images</div> -->
+      <div class="gallery">
+        <div class="gallery-track" id="mechatronics-gallery-images">
+          <div class="gallery-slide">
+            <div class="gallery-media"><img src="images/mechatronics/robot.PNG" alt="Steering assembly"></div>
+            <p class="gallery-caption">Steering assembly integrated into the robot body.</p>
+          </div>
 
-      <div class="gallery-slide">
-        <div class="gallery-media"><img src="images/mechatronics/nozzle.PNG" alt="Nozzle assembly"></div>
-        <p class="gallery-caption">Jet propulsion nozzle assembly.</p>
+          <div class="gallery-slide">
+            <div class="gallery-media"><img src="images/mechatronics/nozzle.PNG" alt="Nozzle assembly"></div>
+            <p class="gallery-caption">Jet propulsion nozzle assembly.</p>
+          </div>
+          <div class="gallery-slide">
+            <div class="gallery-media"><img src="images/mechatronics/actuation.PNG" alt="Actuation circuit"></div>
+            <p class="gallery-caption">Actuation circuit driving the jet propulsion system.</p>
+          </div>
+          <div class="gallery-slide">
+            <div class="gallery-media"><img src="images/mechatronics/circuit.PNG" alt="Circuit stack"></div>
+            <p class="gallery-caption">Custom PCB circuit stack for onboard sensing and actuation control.</p>
+          </div>
+        </div>
+        <button class="gallery-nav gallery-prev" onclick="scrollGallery('mechatronics-gallery-images', -1)">‹</button>
+        <button class="gallery-nav gallery-next" onclick="scrollGallery('mechatronics-gallery-images', 1)">›</button>
       </div>
-      <div class="gallery-slide">
-        <div class="gallery-media"><img src="images/mechatronics/actuation.PNG" alt="Actuation circuit"></div>
-        <p class="gallery-caption">Actuation circuit driving the jet propulsion system.</p>
-      </div>
-      <div class="gallery-slide">
-        <div class="gallery-media"><img src="images/mechatronics/circuit.PNG" alt="Circuit stack"></div>
-        <p class="gallery-caption">Custom PCB circuit stack for onboard sensing and actuation control.</p>
-      </div>
-
-      <!-- Add more slides here as you export more images, e.g.: -->
-      <!-- <div class="gallery-slide">
-        <div class="gallery-media"><img src="images/mechatronics/circuit_stack.png" alt="Circuit stack"></div>
-        <p class="gallery-caption">Caption text.</p>
-      </div> -->
     </div>
-    <button class="gallery-nav gallery-prev" onclick="scrollGallery('mechatronics-gallery', -1)">‹</button>
-    <button class="gallery-nav gallery-next" onclick="scrollGallery('mechatronics-gallery', 1)">›</button>
+
+    <div class="gallery-col">
+  <!-- <div class="gallery-col-label">Videos</div> -->
+  <div class="gallery">
+    <div class="gallery-track" id="mechatronics-gallery-videos">
+      <div class="gallery-slide">
+        <div class="gallery-media">
+          <div class="iframe-vertical-wrap">
+            <iframe src="https://www.youtube.com/embed/_EjXlP2ofMs?modestbranding=1&rel=0&autoplay=1&mute=1" title="Robot demo video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          </div>
+        </div>
+        <p class="gallery-caption">Robot demo video.</p>
+      </div>
+
+      <div class="gallery-slide">
+        <div class="gallery-media">
+          <div class="video-frame">
+            <iframe src="https://www.youtube.com/embed/ILrQJQVV6CU?modestbranding=1&rel=0&autoplay=1&mute=1" title="Mechatronics demo video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+          </div>
+        </div>
+        <p class="gallery-caption">Nozzle demo video.</p>
+      </div>
+    </div>
+    <button class="gallery-nav gallery-prev" onclick="scrollGallery('mechatronics-gallery-videos', -1)">‹</button>
+    <button class="gallery-nav gallery-next" onclick="scrollGallery('mechatronics-gallery-videos', 1)">›</button>
+  </div>
+</div>
   </div>
 </div>
 
 <div class="entry">
   <div class="entry-top">
     <h3>Underwater Soft Robot — Fluid Dynamics Simulation</h3>
-    <span class="date">2020 – 2026</span>
+    <span class="date">2025 – 2026</span>
   </div>
   <div class="venue">PhD Thesis, GRASP Lab, University of Pennsylvania</div>
   <div class="tags">
@@ -491,21 +626,57 @@ When I'm not building robots, you can usually find me working out or practicing 
     <li>Calibrated against experimentally collected trajectories to ensure simulation fidelity.</li>
   </ul>
 
-  <div class="gallery">
-    <div class="gallery-track" id="fluid-dynamics-gallery">
-      <div class="gallery-slide">
-        <div class="gallery-media"><img src="images/simulation/calibration.PNG" alt="Fluid dynamics simulation"></div>
-        <p class="gallery-caption">Simulation trajectory comparison with experimental data</p>
-      </div>
+  <div class="gallery-pair">
+    <div class="gallery-col">
+      <!-- <div class="gallery-col-label">Images</div> -->
+      <div class="gallery">
+        <div class="gallery-track" id="fluid-dynamics-gallery-images">
+          <div class="gallery-slide">
+            <div class="gallery-media"><img src="images/simulation/robot_sim1.gif" alt="Fluid dynamics simulation"></div>
+            <p class="gallery-caption">Simulated robot dynamics behavior when nozzle angle = 0 deg</p>
+          </div>
 
-      <!-- Add more slides here as you export more images, e.g.: -->
-      <!-- <div class="gallery-slide">
-        <div class="gallery-media"><img src="images/fluid-dynamics/placeholder2.png" alt="Fluid dynamics simulation"></div>
-        <p class="gallery-caption">Caption text.</p>
-      </div> -->
+          <div class="gallery-slide">
+            <div class="gallery-media"><img src="images/simulation/robot_sim2.gif" alt="Fluid dynamics simulation"></div>
+            <p class="gallery-caption">Simulated robot dynamics when nozzle angle = 30 deg</p>
+          </div>
+          <div class="gallery-slide">
+            <div class="gallery-media"><img src="images/simulation/calibration.PNG" alt="Fluid dynamics simulation"></div>
+            <p class="gallery-caption">Simulation trajectory comparison with experimental data</p>
+          </div>
+
+        </div>
+        <button class="gallery-nav gallery-prev" onclick="scrollGallery('fluid-dynamics-gallery-images', -1)">‹</button>
+        <button class="gallery-nav gallery-next" onclick="scrollGallery('fluid-dynamics-gallery-images', 1)">›</button>
+      </div>
     </div>
-    <button class="gallery-nav gallery-prev" onclick="scrollGallery('fluid-dynamics-gallery', -1)">‹</button>
-    <button class="gallery-nav gallery-next" onclick="scrollGallery('fluid-dynamics-gallery', 1)">›</button>
+
+    <div class="gallery-col">
+      <!-- <div class="gallery-col-label">Videos</div> -->
+      <div class="gallery">
+        <div class="gallery-track" id="fluid-dynamics-gallery-videos">
+          <div class="gallery-slide">
+            <div class="gallery-media">
+              <div class="video-frame">
+                <iframe src="https://www.youtube.com/embed/OgvaM4U4oG0?modestbranding=1&rel=0&autoplay=1&mute=1" title="Fluid dynamics simulation video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+              </div>
+            </div>
+            <p class="gallery-caption">Experimental trajectory when nozzle angle = 0 deg</p>
+          </div>
+
+          <div class="gallery-slide">
+            <div class="gallery-media">
+              <div class="video-frame">
+                <iframe src="https://www.youtube.com/embed/v40II97wgtI?modestbranding=1&rel=0&autoplay=1&mute=1" title="Fluid dynamics simulation video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+              </div>
+            </div>
+            <p class="gallery-caption">Experimental trajectory when nozzle angle = 30 deg</p>
+          </div>
+        </div>
+        <button class="gallery-nav gallery-prev" onclick="scrollGallery('fluid-dynamics-gallery-videos', -1)">‹</button>
+        <button class="gallery-nav gallery-next" onclick="scrollGallery('fluid-dynamics-gallery-videos', 1)">›</button>
+      </div>
+    </div>
   </div>
 
 </div>
@@ -513,7 +684,7 @@ When I'm not building robots, you can usually find me working out or practicing 
 <div class="entry">
   <div class="entry-top">
     <h3>Underwater Soft Robot — RL Navigation Control</h3>
-    <span class="date">2020 – 2026</span>
+    <span class="date">2025 – 2026</span>
   </div>
   <div class="venue">PhD Thesis, GRASP Lab, University of Pennsylvania</div>
   <div class="tags">
@@ -529,21 +700,42 @@ When I'm not building robots, you can usually find me working out or practicing 
     <li>Deployed the policy zero-shot on physical hardware, demonstrating successful sim-to-real transfer for position tracking.</li>
   </ul>
 
-  <div class="gallery">
-    <div class="gallery-track" id="rl-navigation-gallery">
-      <div class="gallery-slide">
-        <div class="gallery-media"><img src="images/RL/trajectory.png" alt="RL navigation policy"></div>
-        <p class="gallery-caption">Robot trajectory tracking performance in simulation.</p>
-      </div>
+  <div class="gallery-pair">
+    <div class="gallery-col">
+      <!-- <div class="gallery-col-label">Images</div> -->
+      <div class="gallery">
+        <div class="gallery-track" id="rl-navigation-gallery-images">
+          
+          <div class="gallery-slide">
+            <div class="gallery-media"><img src="images/RL/trajectory_circle_test.gif" alt="RL navigation policy"></div>
+            <p class="gallery-caption">Trained Policy tested on a circular trajectory tracking task in simulation.</p>
+          </div>
+          <div class="gallery-slide">
+            <div class="gallery-media"><img src="images/RL/trajectory.png" alt="RL navigation policy"></div>
+            <p class="gallery-caption">Robot trajectory tracking performance in simulation.</p>
+          </div>
 
-      <!-- Add more slides here as you export more images, e.g.: -->
-      <!-- <div class="gallery-slide">
-        <div class="gallery-media"><img src="images/rl-navigation/placeholder2.png" alt="RL navigation policy"></div>
-        <p class="gallery-caption">Caption text.</p>
-      </div> -->
+        </div>
+        <button class="gallery-nav gallery-prev" onclick="scrollGallery('rl-navigation-gallery-images', -1)">‹</button>
+        <button class="gallery-nav gallery-next" onclick="scrollGallery('rl-navigation-gallery-images', 1)">›</button>
+      </div>
     </div>
-    <button class="gallery-nav gallery-prev" onclick="scrollGallery('rl-navigation-gallery', -1)">‹</button>
-    <button class="gallery-nav gallery-next" onclick="scrollGallery('rl-navigation-gallery', 1)">›</button>
+
+    <div class="gallery-col">
+      <!-- <div class="gallery-col-label">Videos</div> -->
+      <div class="gallery">
+        <div class="gallery-track" id="rl-navigation-gallery-videos">
+          <div class="gallery-slide">
+            <div class="gallery-media">
+              <div class="video-frame">
+                <iframe src="https://www.youtube.com/embed/4gp77yjhpmc?modestbranding=1&rel=0&autoplay=1&mute=1" title="RL navigation policy video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+              </div>
+            </div>
+            <p class="gallery-caption">Trained policy deployed zero-shot on real hardware for point tracking.</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- <div class="entry-links">
